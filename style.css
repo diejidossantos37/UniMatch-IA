@@ -1,0 +1,450 @@
+/* =======( Dieji dos Santos )=====*/
+
+:root {
+    --anim-duration: 0.6s;
+
+    --bg-light: #f4f7fb;
+    --text-light: #1e293b;
+
+    --bg-dark-1: #0f172a;
+    --bg-dark-2: #111827;
+    --text-dark: #f1f5f9;
+
+    --card-dark: rgba(30, 41, 59, 0.95);
+    --border-dark: #334155;
+
+    --shadow-dark: 0 0 25px rgba(0, 0, 0, 0.4);
+
+    --compat-gradient: linear-gradient(90deg, #198754, #0dcaf0);
+}
+
+
+/* =========GLOBAL========== */
+
+body {
+    background: var(--bg-light);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+/* Transições suaves */
+body,
+.card,
+.table,
+.modal-content,
+.form-control,
+.form-select,
+.btn,
+.progress,
+thead,
+tbody,
+.accordion-item,
+.shape {
+    transition:
+        background-color 0.5s ease,
+        color 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease,
+        transform 0.3s ease,
+        opacity 0.5s ease,
+        filter 0.5s ease;
+}
+
+
+/* =======DARK THEME======== */
+
+body.dark-theme {
+    background: linear-gradient(
+        135deg,
+        var(--bg-dark-1),
+        var(--bg-dark-2)
+    );
+
+    color: var(--text-dark);
+}
+
+
+/* Cards + Modal */
+
+body.dark-theme .card,
+body.dark-theme .modal-content {
+    background: var(--card-dark);
+    color: var(--text-dark);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow: var(--shadow-dark);
+}
+
+
+/* Inputs */
+
+body.dark-theme .form-control,
+body.dark-theme .form-select {
+    background: #1e293b;
+    color: white;
+    border-color: var(--border-dark);
+}
+
+body.dark-theme .form-control::placeholder {
+    color: #cbd5e1;
+}
+
+
+/* Tabelas */
+
+body.dark-theme .table {
+    color: var(--text-dark);
+}
+
+body.dark-theme .table-light {
+    background: #1e293b !important;
+    color: white !important;
+}
+
+body.dark-theme th,
+body.dark-theme td {
+    border-color: var(--border-dark) !important;
+}
+
+
+/* Accordion */
+
+body.dark-theme .accordion-item {
+    background: #1e293b;
+    color: white;
+    border-color: var(--border-dark);
+}
+
+
+/* Botões */
+
+body.dark-theme .btn-outline-secondary {
+    color: white;
+    border-color: #94a3b8;
+}
+
+body.dark-theme .btn-outline-secondary:hover {
+    background: white;
+    color: black;
+}
+
+
+/* Badge */
+
+body.dark-theme .badge {
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+}
+
+
+/* Floating Shapes */
+
+body.dark-theme .shape {
+    opacity: 0.15;
+    filter: blur(2px);
+}
+
+
+/* ==========THEME ANIMATION========== */
+
+body.theme-animating {
+    animation: pulseTheme 0.5s ease;
+}
+
+@keyframes pulseTheme {
+
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.01);
+        filter: brightness(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+
+/* ===========FLOATING BACKGROUND SHAPES========== */
+
+.floating-shapes {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+}
+
+.shape {
+    position: absolute;
+
+    border-radius: 50%;
+
+    opacity: 0.1;
+
+    animation: float 20s infinite ease-in-out;
+}
+
+.shape1 {
+    width: 200px;
+    height: 200px;
+
+    background: #0d6efd;
+
+    top: 10%;
+    left: 5%;
+
+    animation-delay: 0s;
+}
+
+.shape2 {
+    width: 300px;
+    height: 300px;
+
+    background: #198754;
+
+    top: 60%;
+    right: 10%;
+
+    animation-delay: 5s;
+}
+
+.shape3 {
+    width: 150px;
+    height: 150px;
+
+    background: #ffc107;
+
+    bottom: 10%;
+    left: 20%;
+
+    animation-delay: 10s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(180deg);
+    }
+}
+
+
+/* ==========SECTION FADE=========== */
+
+.section-fade {
+    opacity: 0;
+
+    animation:
+        fadeInUp var(--anim-duration)
+        ease-out
+        forwards;
+}
+
+@keyframes fadeInUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ======WIZARD=====*/
+
+.wizard-step {
+    display: none;
+}
+
+/* Corrigido: Se o elemento for originalmente uma row, mantém as propriedades flex do Bootstrap */
+.wizard-step.active {
+    display: block;
+    animation: slideIn var(--anim-duration) ease;
+}
+
+.wizard-step.row.active {
+    display: flex !important;
+}
+
+@keyframes slideIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* ==========COURSE CARDS========= */
+
+.course-card {
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+/* ========COMPATIBILITY BAR========= */
+
+.compat-bar {
+    height: 8px;
+
+    background: #e9ecef;
+
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.compat-fill {
+    width: 0%;
+    height: 100%;
+
+    background: var(--compat-gradient);
+
+    transition: width 1.5s ease-out;
+}
+
+
+/* ===========BUTTON RIPPLE EFFECT========== */
+
+.btn-auto {
+    position: relative;
+
+    overflow: hidden;
+}
+
+.btn-auto::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 0;
+    height: 0;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    transform: translate(-50%, -50%);
+
+    transition:
+        width 0.6s,
+        height 0.6s;
+}
+
+.btn-auto:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Estilos para a Tabela Interativa do Step 0 */
+#tabelaCursos tr {
+  transition: background-color 0.2s ease;
+}
+#tabelaCursos tr:hover {
+  background-color: rgba(13, 110, 253, 0.04) !important;
+}
+.btn-auto {
+  z-index: 2;
+  position: relative;
+}
+
+/* ==========================================
+   MODO ESCURO ELEGANTE (Apenas quando .dark-mode está ativo)
+   ========================================== */
+body.dark-mode {
+    background-color: var(--bg-dark-1) !important;
+    color: var(--text-dark) !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .list-group-item,
+body.dark-mode .accordion-item {
+    background-color: var(--card-dark) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--border-dark) !important;
+    box-shadow: var(--shadow-dark) !important;
+}
+
+body.dark-mode .table {
+    color: var(--text-dark) !important;
+    border-color: var(--border-dark) !important;
+}
+
+body.dark-mode .table th {
+    background-color: #1e293b !important;
+    color: #94a3b8 !important;
+}
+
+body.dark-mode #tabelaCursos tr:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .accordion-button {
+    background-color: #1e293b !important;
+    color: var(--text-dark) !important;
+    border-color: var(--border-dark) !important;
+}
+
+body.dark-mode .accordion-button:not(.collapsed) {
+    background-color: rgba(13, 110, 253, 0.2) !important;
+    color: #60a5fa !important;
+}
+
+body.dark-mode .text-muted {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .page-link {
+    background-color: #1e293b !important;
+    border-color: var(--border-dark) !important;
+    color: #60a5fa !important;
+}
+
+body.dark-mode .page-item.active .page-link {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    color: #fff !important;
+}
+
+/* Suaviza as formas flutuantes de fundo no tema escuro */
+body.dark-mode .shape {
+    opacity: 0.04 !important;
+}
